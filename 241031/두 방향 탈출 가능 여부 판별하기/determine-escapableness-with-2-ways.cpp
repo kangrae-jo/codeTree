@@ -29,7 +29,7 @@ bool dfs(int x, int y){
         int x_ = x + offset[dir][1];
 
         if (isMoveable(x_, y_)){
-            dfs(x_,y_);
+            if (dfs(x_,y_)) return true;
         }
     }
     return false;
