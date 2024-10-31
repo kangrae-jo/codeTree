@@ -17,6 +17,7 @@ bool moveable(int x, int y){
 
 bool dfs(int x, int y){
     if (field[y][x] == WALL) return false;
+    if (x == n-1 && y == m-1) return true;
 
     for (int dir=0; dir<2; dir++){
         int y_ = y + offset[dir][0];
@@ -24,7 +25,7 @@ bool dfs(int x, int y){
 
         if (moveable(x_, y_)){
             field[y][x] = VISITED;
-            return dfs(x_,y_);
+            dfs(x_,y_);
         }
     }
     return false;
