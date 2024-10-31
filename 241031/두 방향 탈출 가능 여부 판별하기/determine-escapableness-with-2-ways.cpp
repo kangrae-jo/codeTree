@@ -12,7 +12,6 @@ int offset[2][2] = {{1,0},{0,1}};
 
 bool isMoveable(int x, int y){
     return (x >= 0 && x < n && y >= 0 && y < m && field[y][x] == PATH);
-    return false;
 }
 
 bool dfs(int x, int y){
@@ -27,7 +26,6 @@ bool dfs(int x, int y){
             if (dfs(x_,y_)) return true;
         }
     }
-    field[y][x] = PATH;
 
     return false;
 }
