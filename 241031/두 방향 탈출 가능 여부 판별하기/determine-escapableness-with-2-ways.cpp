@@ -16,7 +16,7 @@ int offset[2][2] = {{-1,0},{0,1}};
 */
 
 bool isMoveable(int x, int y){
-    if (0 > x || x <= n || 0 > y || y <=n) return false;
+    if (0 > x || x <= n || 0 > y || y <=m) return false;
     if (field[y][x] == PATH) return true;
     return false;
 }
