@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 #define WALL 0
@@ -7,7 +8,7 @@ using namespace std;
 
 int n,m;
 int field[101][101];
-int offset[2][2] = {{-1,0},{0,1}};
+int offset[2][2] = {{1,0},{0,1}};
 
 /*
 2 2
@@ -16,8 +17,7 @@ int offset[2][2] = {{-1,0},{0,1}};
 */
 
 bool isMoveable(int x, int y){
-    if (0 > x || x <= n || 0 > y || y <=m) return false;
-    if (field[y][x] == PATH) return true;
+    return (x >= 0 && x < n && y >= 0 && y < m && field[y][x] == PATH);
     return false;
 }
 
