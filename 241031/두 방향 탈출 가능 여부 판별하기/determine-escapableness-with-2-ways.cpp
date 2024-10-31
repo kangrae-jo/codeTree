@@ -9,6 +9,12 @@ int n,m;
 int field[101][101];
 int offset[2][2] = {{-1,0},{0,1}};
 
+/*
+2 2
+1 1
+0 1
+*/
+
 bool moveable(int x, int y){
     if (0 > x || x <= n || 0 > y || y <=n) return false;
     if (field[y][x] == PATH) return true;
@@ -16,7 +22,6 @@ bool moveable(int x, int y){
 }
 
 bool dfs(int x, int y){
-    if (field[y][x] == WALL) return false;
     if (x == n-1 && y == m-1) return true;
 
     for (int dir=0; dir<2; dir++){
