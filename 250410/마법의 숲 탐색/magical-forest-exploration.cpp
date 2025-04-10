@@ -127,6 +127,7 @@ int getRowOfFairy(vector<vector<int>> forest, Fairy fairy) {
             int nextX = curX + OFFSET[dir][1];
             if (isIn(nextY, nextX)) {
                 if (forest[nextY][nextX] == ESCAPE) {
+                    answer = max(answer, nextY);
                     // dfs로 다음 fairy를 찾아서 q.push
                     // 다음 fairy는 무조건 2칸 뒤에 있음
                     dfs(forest, q, nextX, nextY, 2);
