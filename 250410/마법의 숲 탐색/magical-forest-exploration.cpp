@@ -11,6 +11,11 @@ const int FAIRY = 2;
 const int ESCAPE = 3;
 const int VISITED = 10;
 
+const int FAIRY_OFFSET[8][2] = {
+    {-2, 0}, {-1, -1}, {-1, 1},
+    {0, -2}, {0, 2},
+    {2, 0}, {1, -1}, {1, 1}
+};
 const int OFFSET[4][2] = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 const int UP = 0;
 const int RIGHT = 1;
@@ -94,19 +99,13 @@ bool isFairyOut(Fairy fairy) {
     else return false;
 }
 
-void dfs(vector<vector<int>>& forest, queue<pair<int,int>>& q, int curX, int curY, int depth) {
-    if (depth == 0 && forest[curY][curX] == FAIRY) {
-        q.push({curY, curX});
-    }
-    
-    forest[curY][curX] = VISITED;
-    for (int dir = 0; dir < 4; dir++) {
-        int nextY = curY + OFFSET[dir][0];
-        int nextX = curX + OFFSET[dir][1];
-        if (isIn(nextY, nextX) && 
-            (forest[nextY][nextX] == GOLEM ||
-             forest[nextY][nextX] == FAIRY ||
-             forest[nextY][nextX] == ESCAPE)) dfs(forest, q, nextX, nextY, depth - 1);
+void findNextFairy(vector<vector<int>>& forest, queue<pair<int,int>>& q, int x, int y) {
+    for (int dir = 0; dir < 8; dir++) {
+        int y_ = y + FAIRY_OFFSET[dir][0];
+        int x_ = x + FAIRY_OFFSET[dir][1];
+        if (isIn(y_, x_) && forest[y_][x_] == FAIRY) {
+            q.push({y_, x_});
+        }
     }
 }
 
@@ -130,7 +129,7 @@ int getRowOfFairy(vector<vector<int>> forest, Fairy fairy) {
                     answer = max(answer, nextY);
                     // dfs로 다음 fairy를 찾아서 q.push
                     // 다음 fairy는 무조건 2칸 뒤에 있음
-                    dfs(forest, q, nextX, nextY, 2);
+                    findNextFairy(forest, q, nextX, nextY);
                 }
                 else if (forest[nextY][nextX] == GOLEM) {
                     // 가장 낮은 곳인지 파악만
