@@ -94,7 +94,7 @@ bool isFairyOut(Fairy fairy) {
     else return false;
 }
 
-void dfs(vector<vector<int>> forest, queue<pair<int,int>>& q, int curX, int curY, int depth) {
+void dfs(vector<vector<int>>& forest, queue<pair<int,int>>& q, int curX, int curY, int depth) {
     if (depth == 0 && forest[curY][curX] == FAIRY) {
         q.push({curY, curX});
     }
